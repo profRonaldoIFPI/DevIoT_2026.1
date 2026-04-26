@@ -19,9 +19,9 @@ void setup() {
     delay(200);
   }
 }
-void loop() {
+void loop() { // 
   lcd.setCursor(0,1);
-  while(digitalRead(btn) == LOW){
+  while(digitalRead(btn) == LOW){ // ou !digitalRead(btn)
    lcd.print("."); 
   }
   lcd.clear();
