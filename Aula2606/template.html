@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Controle RGB</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      text-align: center;
+      margin-top: 50px;
+      background-color: #f4f4f9;
+    }
+
+    h1 {
+      color: #333;
+    }
+
+    .slider-container {
+      margin: 20px auto;
+      width: 80%;
+      max-width: 400px;
+    }
+
+    input[type=range] {
+      width: 100%;
+    }
+
+    span {
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Controle de LED RGB</h1>
+
+  <div class="slider-container">
+    <p>Vermelho: <span id="valR" style="color: red;">0</span></p>
+    <input type="range" id="sliderR" min="0" max="255" value="0" oninput="atualizarCor('r', this.value)">
+  </div>
+
+  <div class="slider-container">
+    <p>Verde: <span id="valG" style="color: green;">0</span></p>
+    <input type="range" id="sliderG" min="0" max="255" value="0" oninput="atualizarCor('g', this.value)">
+  </div>
+
+  <div class="slider-container">
+    <p>Azul: <span id="valB" style="color: blue;">0</span></p>
+    <input type="range" id="sliderB" min="0" max="255" value="0" oninput="atualizarCor('b', this.value)">
+  </div>
+
+  <script>
+    function atualizarCor(cor, valor) {
+      // Atualiza o texto na tela
+      document.getElementById('val' + cor.toUpperCase()).innerText = valor;
+
+      // Envia a requisição para o ESP32 em segundo plano
+      fetch('/set?cor=' + cor + '&valor=' + valor);
+    }
+  </script>
+</body>
+
+</html>
